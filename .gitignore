@@ -1,0 +1,36 @@
+# 编译生成的可执行文件
+*.exe
+*.out
+*.app
+
+# 目标文件（编译中间产物）
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+
+# 调试文件
+*.dSYM/
+*.pdb
+*.ilk
+*.exp
+
+# IDE配置文件（根据你用的IDE选择）
+.vscode/          # VS Code
+.idea/            # CLion
+*.suo             # Visual Studio
+*.user
+*.sln.docstates
+
+# 临时文件
+*.tmp
+*.log
+*.swp
+*.swo
+*~
+
+# 编译生成的程序（假设你的程序叫这个）
+/通讯录系统.exe
+/a.out
