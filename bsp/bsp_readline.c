@@ -1,11 +1,12 @@
-#include "bsp_readline.h"
+#include "bsp/bsp_readline.h"
 #include <stdio.h>
 #include <string.h>
 
 
 int readline(char *str, int size)
 {
-    int str_len,ch;
+    size_t str_len;
+    int ch;
 
     if( fgets(str, size, stdin) == NULL )
         return -1;

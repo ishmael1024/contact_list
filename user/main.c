@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "database.h"
-#include "bsp_readline.h"
-#include "contact_manage.h"
-#include "database_inheritance.h"
+#include "data/database.h"
+#include "bsp/bsp_readline.h"
+#include "bsp/bsp_data_load.h"
+#include "app/contact_manage.h"
+
 
 
 
 int main()
 {
     contact_book mycontact_book = {0};
-    int flag = 1,   command_num,  contact_number,str_len;
-    char ch;
+    int flag = 1,   command_num,  contact_number;
     char command_list[6][10] = {
         "add",
         "print",
@@ -23,7 +23,7 @@ int main()
     };
     char command[10];
 
-    database_inheritance(&mycontact_book);
+    data_load(&mycontact_book, "D:\\Personal\\Desktop\\通讯录系统\\DATABASE.dat");
 
     while(flag)
     {

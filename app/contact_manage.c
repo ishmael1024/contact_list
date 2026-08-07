@@ -1,8 +1,9 @@
-#include "database.h"
-#include "contact_manage.h"
+#include "app/contact_manage.h"
 #include <stdio.h>
 #include <string.h>
-#include "bsp_readline.h"
+#include "bsp/bsp_readline.h"
+#include "bsp/bsp_data_save.h"
+#include "bsp/bsp_wait_enter.h"
 
 
 int add(contact_book *book)
@@ -43,41 +44,15 @@ int add(contact_book *book)
     
     (*num)++;
 
-    fp = fopen("DATABASE.dat","wb+");
-    if(fp == NULL)
+    if( data_save(book, "D:\\Personal\\Desktop\\通讯录系统\\DATABASE.dat") != 0)
     {
-        printf("data_base.c cant be open,failed to add\n");
+        printf("failed to save data,cant add\n");
         return -1;
     }
-
-    if( fseek(fp,0,SEEK_SET) != 0 )
-    {
-        printf("failed to fseek,cant add\n");
-        return -1;
-    }
-
-    if( fwrite(num,sizeof(int),1,fp) != 1 )
-    {
-        printf("failed to write num\n");
-        return -1;
-    }
-
-    if( fseek(fp,sizeof(int),SEEK_SET) != 0 )
-    {
-        printf("failed to fseek,cant add\n");
-        return -1;
-    }
-
-    if( fwrite(new_contact,sizeof(new_contact[0]),*num,fp) != *num )
-    {
-        printf("failed to write contact\n");
-        return -1;
-    }
-    
-    fclose(fp);
 
     printf("\n\nimformation has been recorded\n\nplease press 'enter' to return");
-    while(getchar() != '\n');
+    
+    void wait_enter();
     
     return 0;
 }
@@ -117,48 +92,22 @@ int contact_delete(contact_book *book)
                strcpy(_contact[j].phone,_contact[j+1].phone);
             }
             
-           (*num)--;
+            (*num)--;
+            if( data_save(book, "D:\\Personal\\Desktop\\通讯录系统\\DATABASE.dat") != 0)
+            {
+                printf("failed to save data,cant delete\n");
+                return -1;
+            }
+
+            printf("\n\ncontact has been delected\n\nplease press 'enter' to return");
+            void wait_enter();
+            return 0;
         }
     }
 
+    printf("failed to delete , please enter the valid name\n");
 
-    fp = fopen("DATABASE.dat","wb+");
-    if(fp == NULL)
-    {
-        printf("data_base.c cant be open,failed to delect\n");
-        return -1;
-    }
-
-    if( fseek(fp,0,SEEK_SET) != 0 )
-    {
-        printf("failed to fseek,cant delete\n");
-        return -1;
-    }
-
-    if( fwrite(num,sizeof(int),1,fp) != 1 )
-    {
-        printf("failed to write num\n");
-        return -1;
-    }
-
-    if( fseek(fp,sizeof(int),SEEK_SET) != 0 )
-    {
-        printf("failed to fseek,cant delete\n");
-        return -1;
-    }
-
-    if( fwrite(_contact,sizeof(_contact[0]),*num,fp) != *num )
-    {
-        printf("failed to write contact\n");
-        return -1;
-    }
-
-    fclose(fp);
-
-    printf("\n\ncontact has been delected\n\nplease press 'enter' to return");
-    while(getchar() != '\n');
-
-    return 0;
+    return -1;
 }
 
 
@@ -202,34 +151,22 @@ int contact_modify(contact_book *book)
                 printf("failed to enter the new phone\n");
                 return -1;
             }
+
+            if( data_save(book, "D:\\Personal\\Desktop\\通讯录系统\\DATABASE.dat") != 0)
+            {
+                printf("failed to save data,cant modify\n");
+                return -1;
+            }
+
+            printf("\n\ncontact has been modifyed\n\nplease press 'enter' to return");
+            void wait_enter();
+            return 0;
         }
     }
 
-    fp = fopen("DATABASE.dat","wb+");
-    if(fp == NULL)
-    {
-        printf("data_base.c cant be open,failed to modify\n");
-        return -1;
-    }
+    printf("failed to modify,please enter the vaild name\n");
 
-    if( fseek(fp,sizeof(int),SEEK_SET) != 0 )
-    {
-        printf("failed to fseek,cant modify\n");
-        return -1;
-    }
-
-    if( fwrite(_contact,sizeof(_contact[0]),*num,fp) !=*num )
-    {
-        printf("failed to write modify contact\n");
-        return -1;
-    }
-    
-    fclose(fp);
-
-    printf("\n\ncontact has been modifyed\n\nplease press 'enter' to return");
-    while(getchar() != '\n');
-
-    return 0;
+    return -1;
 }
 
 
@@ -239,7 +176,7 @@ int contact_search(contact_book *book)
 {
     contact *_contact = book->contact_list;
     int *num = &book->contact_number;
-    char name[10];
+    char name[20];
 
     printf("please enter the 'name' to search:\n");
     if( readline(name,sizeof(name)) == -1)
@@ -257,7 +194,7 @@ int contact_search(contact_book *book)
     }
 
     printf("\t\tcontact has been searched\n\nplease prsee 'enter' to return\n");
-    while(getchar() != '\n');
+    void wait_enter();
 
     return 0;
 }
@@ -275,7 +212,7 @@ void print(contact_book *book)
         printf("\t\t%s\t%s\t%s\n",_contact[i].id,_contact[i].name,_contact[i].phone);
 
     printf("\n\n\t\timformation has been printed\n\nplease press 'enter' to return");
-    while(getchar() != '\n' );
+    void wait_enter();
 }
 
 
