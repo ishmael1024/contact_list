@@ -3,6 +3,8 @@
 
 #include "data/database.h"
 
+#define DATABASE_PATH "data/DATABASE.dat"
+
 int data_save(contact_book *book, char *filename);
 
 #endif

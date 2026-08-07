@@ -12,7 +12,7 @@
 int main()
 {
     contact_book mycontact_book = {0};
-    int flag = 1,   command_num,  contact_number;
+    int flag = 1,   command_num;
     char command_list[6][10] = {
         "add",
         "print",
@@ -23,7 +23,7 @@ int main()
     };
     char command[10];
 
-    data_load(&mycontact_book, "D:\\Personal\\Desktop\\通讯录系统\\DATABASE.dat");
+    data_load(&mycontact_book, DATABASE_PATH);
 
     while(flag)
     {

@@ -19,15 +19,7 @@ int data_load(contact_book *book, char *filename)
         return -1;
     }
         
-
-    if( fseek(fp,0,SEEK_SET) != 0 )
-    {
-        printf("failed to fseek,cant load contact_number\n");
-        fclose(fp);
-        return -1;
-    }
         
-    
     if( fread(&num_copy,sizeof(int),1,fp) != 1 )
     {
         printf("failed to fread,cant load contact_number\n");
@@ -41,22 +33,15 @@ int data_load(contact_book *book, char *filename)
         fclose(fp);
         return -1;
     }
-    else
-        *num = num_copy;
 
-    if( fseek(fp,sizeof(int),SEEK_SET) != 0 )
-    {
-        printf("failed to fseek,cant load contact_list\n");
-        fclose(fp);
-        return -1;
-    }
-    
-    if( fread(_contact,sizeof(_contact[0]),*num,fp) != *num )
+    if( fread(_contact,sizeof(_contact[0]),num_copy,fp) != num_copy )
     {
         printf("failed to fread,cant load contact_list\n");
         fclose(fp);
         return -1;
     }
+
+    *num = num_copy;
     
     fclose(fp);
 

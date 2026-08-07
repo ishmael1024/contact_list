@@ -16,23 +16,9 @@ int data_save(contact_book *book, char *filename)
         return -1;
     }
 
-    if( fseek(fp,0,SEEK_SET) != 0 )
-    {
-        printf("failed to fseek,cant save\n");
-        fclose(fp);
-        return -1;
-    }
-
     if( fwrite(num,sizeof(int),1,fp) != 1 )
     {
         printf("failed to write num\n");
-        fclose(fp);
-        return -1;
-    }
-
-    if( fseek(fp,sizeof(int),SEEK_SET) != 0 )
-    {
-        printf("failed to fseek,cant save\n");
         fclose(fp);
         return -1;
     }

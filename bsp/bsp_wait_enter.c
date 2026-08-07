@@ -6,5 +6,6 @@ void wait_enter()
 {
     int ch;
 
-    while(ch = getchar() != '\n' && ch != EOF);
+    printf("please prsee 'enter' to return\n");
+    while( (ch = getchar()) != '\n' && ch != EOF );
 }
