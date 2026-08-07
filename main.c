@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-#include "main.h"
+#include <stdlib.h>
+#include "database.h"
+#include "bsp_readline.h"
 #include "contact_manage.h"
 #include "database_inheritance.h"
 
@@ -16,8 +18,8 @@ int main()
         "print",
         "search",
         "modify",
-        "delect",
-        "quiet"
+        "delete",
+        "quit"
     };
     char command[10];
 
@@ -30,17 +32,15 @@ int main()
                         2) print\n \
                         3) search\n \
                         4) modify\n \
-                        5) delect\n \
-                        6) quiet\n");
-
-        fgets(command,sizeof(command)-1,stdin);
-
-        str_len = strlen(command);
-        if( command[str_len-1] == '\n' )
-                command[str_len-1] = '\0';
-        else
-                while( (ch = getchar()) != '\n'&& ch !=EOF );
-
+                        5) delete\n \
+                        6) quit\n");
+        
+        if( readline(command, sizeof(command)) == -1)
+        {
+                printf("failed to enter command\n");
+                        exit(0);
+        }
+        
 
         for(command_num = 0; command_num < 6; command_num++)
         {
@@ -57,9 +57,9 @@ int main()
                     break;
             case 3: contact_modify(&mycontact_book);
                     break;
-            case 4: contact_delect(&mycontact_book);
+            case 4: contact_delete(&mycontact_book);
                     break;
-            case 5: quiet(&flag);
+            case 5: quit(&flag);
                     break;
             default: printf("NO VALID COMMAND!");
                      break;               

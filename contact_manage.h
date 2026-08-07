@@ -1,11 +1,11 @@
-#ifndef _MANAGE_H_
-#define _MANAGE_H_
+#ifndef CONTACT_MANAGE_H_
+#define CONTACT_MANAGE_H_
 
-void add();
-void contact_delect();
-void contact_modify();
-void contact_search();
-void print();
-void quiet(int *flag);
+int add(contact_book *book);
+int contact_delete(contact_book *book);
+int contact_modify(contact_book *book);
+int contact_search(contact_book *book);
+void print(contact_book *book);
+void quit(int *flag);
 
 #endif

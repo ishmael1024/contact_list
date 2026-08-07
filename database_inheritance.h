@@ -1,6 +1,6 @@
 #ifndef _DATABSE_INHERITANCE_H_
 #define _DATABSE_INHERITANCE_H_
 
-void database_inheritance();
+int database_inheritance(contact_book *book);
 
 #endif

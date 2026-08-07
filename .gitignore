@@ -32,5 +32,6 @@
 *~
 
 # 编译生成的程序（假设你的程序叫这个）
-/通讯录系统.exe
+/contact_book.exe
 /a.out
+/DATABASE.dat

@@ -1,7 +1,8 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef DATABASE_H_
+#define DATABASE_H_
 
 #define MAX 30
+
 
 typedef struct {
     char id[20];
@@ -13,6 +14,7 @@ typedef struct {
     contact contact_list[MAX];
     int contact_number;
 } contact_book;
+
 
 
 #endif
