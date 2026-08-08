@@ -44,7 +44,7 @@ int main()
 	else if(status == excess)
 	{
 		printf("command is too long,please re-enter\n");
-		exit(0);
+		continue;
 	}
 	
 

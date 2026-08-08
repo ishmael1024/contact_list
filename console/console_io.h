@@ -1,5 +1,5 @@
 #ifndef CONSOLE_IO_H_
-#define CONSOLE_IO_H
+#define CONSOLE_IO_H_
 
 #define success 0
 #define error   -1

@@ -12,7 +12,7 @@
 - 将数据保存到文件中，方便下次使用
 
 ## 环境要求
-- Windows / Linux / macOS
+- Windows + MAKE
 - GCC 或 Clang 编译器、mingw32-make.exe
 
 ## 编译运行

@@ -102,6 +102,11 @@ int contact_delete(contact_book *book)
         printf("failed to enter the name");
         return -1;
     }
+    else if( status == excess)
+    {
+        printf("name is too long,delete has ended");
+        return -1;
+    }
     
 
     for(int i = 0; i < *(num); i++)
@@ -142,7 +147,7 @@ int contact_modify(contact_book *book)
 {
     contact_book temp = *book;
     contact *_contact = temp.contact_list;
-    int *num = &temp.contact_number;
+    int *num = &temp.contact_number, status;
     char name[20];
 
     if( (*num) == 0 )
@@ -152,9 +157,14 @@ int contact_modify(contact_book *book)
     }
 
     printf("please enter 'name' to modify:");
-    if( readline(name,sizeof(name)) == -1 )
+    if( (status = readline(name,sizeof(name))) == error )
     {
         printf("failed to enter the name\n");
+        return -1;
+    }
+    else if(status == excess)
+    {
+        printf("name is too long,modify has ended\n");
         return -1;
     }
     
@@ -164,17 +174,27 @@ int contact_modify(contact_book *book)
         if(strcmp(name,_contact[i].name) == 0)
         {
             printf("please enter the new 'id':");
-            if( readline(_contact[i].id,sizeof(_contact[i].id)) == -1 )
+            if( (status = readline(_contact[i].id,sizeof(_contact[i].id))) == error )
             {
                 printf("failed to enter the new id\n");
+                return -1;
+            }
+            else if(status == excess)
+            {
+                printf("id is too long,modify has ended\n");
                 return -1;
             }
         
 
             printf("please enter the new 'phone':");
-            if( readline(_contact[i].phone,sizeof(_contact[i].phone)) == -1 )
+            if( (status = readline(_contact[i].phone,sizeof(_contact[i].phone))) == error )
             {
                 printf("failed to enter the new phone\n");
+                return -1;
+            }
+            else if(status == excess)
+            {
+                printf("phone is too long,modify has ended\n");
                 return -1;
             }
 
