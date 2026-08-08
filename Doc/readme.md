@@ -13,12 +13,12 @@
 
 ## 环境要求
 - Windows / Linux / macOS
-- GCC 或 Clang 编译器、mingw32-make
+- GCC 或 Clang 编译器、mingw32-make.exe
 
 ## 编译运行
 在命令行中执行：
 
 ```bash
 mingw32-make
-./contact
+./contact_book
 
