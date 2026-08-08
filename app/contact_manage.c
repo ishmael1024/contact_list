@@ -10,7 +10,7 @@ int add(contact_book *book)
 {
     contact_book temp = {0};
     contact *new_contact = temp.contact_list;
-    int *num = &temp.contact_number;
+    int *num = &temp.contact_number, status;
 
     
     temp = *book;
@@ -23,24 +23,42 @@ int add(contact_book *book)
       
         
     printf("please enter the id:");
-    if( readline(new_contact[*num].id, sizeof(new_contact[*num].id)) == -1 )
+    if( (status = readline(new_contact[*num].id, sizeof(new_contact[*num].id))) == error ) 
     {
         printf("failed to enter id\n");
         return -1;
     }
+    else if( status == excess )
+    {
+        printf("id is too long,add has ended\n");
+        return -1;
+
+    }
 
     printf("please enter the name:");
-    if( readline(new_contact[*num].name, sizeof(new_contact[*num].name)) == -1 )
+    if( (status = readline(new_contact[*num].name, sizeof(new_contact[*num].name))) == error )
     {
-        printf("\nfailed to enter name\n");
+        printf("failed to enter name\n");
         return -1;
+    }
+    else if( status == excess )
+    {
+        printf("name is too long,add has ended\n");
+        return -1;
+
     }
     
     printf("please enter the phone:");
-    if( readline(new_contact[*num].phone, sizeof(new_contact[*num].phone)) == -1 )
+    if( (status = readline(new_contact[*num].phone, sizeof(new_contact[*num].phone))) == error )
     {
         printf("failed to enter phone\n");
         return -1;
+    }
+    else if( status == excess )
+    {
+        printf("phone is too long,add has ended\n");
+        return -1;
+
     }
     
     (*num)++;
@@ -66,7 +84,7 @@ int contact_delete(contact_book *book)
 {
     contact_book temp = {0};
     contact *_contact = temp.contact_list;
-    int *num = &temp.contact_number;
+    int *num = &temp.contact_number, status;
     char name[20];
 
     temp = *book;
@@ -79,7 +97,7 @@ int contact_delete(contact_book *book)
     
 
     printf("please enter the 'name' to delect:");
-    if( readline(name, sizeof(name)) == -1)
+    if( (status = readline(name, sizeof(name))) == error )
     {
         printf("failed to enter the name");
         return -1;
