@@ -1,9 +1,9 @@
 #include "app/contact_manage.h"
+#include "console/console_io.h"
+#include "storage/contact_storage.h"
 #include <stdio.h>
 #include <string.h>
-#include "bsp/bsp_readline.h"
-#include "bsp/bsp_data_save.h"
-#include "bsp/bsp_wait_enter.h"
+
 
 
 int add(contact_book *book)
@@ -98,7 +98,7 @@ int contact_delete(contact_book *book)
             }
             
             (*num)--;
-            if( data_save(book, DATABASE_PATH) != 0)
+            if( data_save(&temp, DATABASE_PATH) != 0)
             {
                 printf("failed to save data,cant delete\n");
                 return -1;
@@ -160,7 +160,7 @@ int contact_modify(contact_book *book)
                 return -1;
             }
 
-            if( data_save(book, DATABASE_PATH) != 0)
+            if( data_save(&temp, DATABASE_PATH) != 0)
             {
                 printf("failed to save data,cant modify\n");
                 return -1;

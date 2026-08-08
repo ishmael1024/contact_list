@@ -1,4 +1,4 @@
-#include "bsp/bsp_readline.h"
+#include "console/console_io.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -19,4 +19,13 @@ int readline(char *str, int size)
 
     return 0;
     
+}
+
+
+void wait_enter()
+{
+    int ch;
+
+    printf("please prsee 'enter' to return\n");
+    while( (ch = getchar()) != '\n' && ch != EOF );
 }

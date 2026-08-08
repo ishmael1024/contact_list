@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include "data/database.h"
-#include "bsp/bsp_readline.h"
-#include "bsp/bsp_data_load.h"
+#include "console/console_io.h"
+#include "storage/contact_storage.h"
 #include "app/contact_manage.h"
 
 
